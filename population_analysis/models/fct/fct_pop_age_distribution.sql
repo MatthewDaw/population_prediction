@@ -1,5 +1,5 @@
 with pop_age_distribution as (
-select * from pop_prediction.dev.src_pop_age_distribution  as pad
+select * from {{ ref('src_pop_age_distribution') }}  as pad
 where pad.label_grouping != 'Total population'
 ),
 

@@ -3,7 +3,7 @@ dbtlearn:
     dev:
       account: rodquym-cnb81909
       database: POP_PREDICTION
-      password: dbtPassword123
+      password: ***
       role: transform
       schema: dev
       threads: 1
@@ -16,7 +16,7 @@ population_analysis:
     dev:
       account: rodquym-cnb81909
       database: POP_PREDICTION
-      password: dbtPassword123
+      password: ****
       role: transform
       schema: DEV
       threads: 1

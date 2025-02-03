@@ -4,7 +4,7 @@ SELECT
     Region,
     House_Price_Index
 FROM
-    POP_PREDICTION.DEV.house_price_index_monthly_hist
+    {{ ref('src_house_price_index') }}
 UNPIVOT
 (
     House_Price_Index FOR Region IN (

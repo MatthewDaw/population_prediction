@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_state
+    description: Dimension table for the states in the US
+    columns:
+      - name: state_id
+        description: Primary key for the state
+        tests:
+          - unique
+          - not_null
+
+      - name: state_name
+        description: The name of the state
+        tests:
+          - not_null
+  - name: fct_births

@@ -4,7 +4,7 @@ SELECT
     CAST(SUBSTRING(Year, 6, 4) AS INT) AS Year,
     num_housing_units
 FROM
-    POP_PREDICTION.DEV.src_house_units_count
+    {{ ref('src_house_units_count') }}
 UNPIVOT
 (
     num_housing_units FOR Year IN (
@@ -19,5 +19,5 @@ ORDER BY GEOGRAPHICAREA, Year
 select ds.id as state_id, hu.year, ds.state_name, hu.num_housing_units from 
 housing_units hu
 JOIN 
-POP_PREDICTION.DEV.dim_state ds on lower(ds.state_name) = lower(hu.GEOGRAPHICAREA)
+{{ ref('dim_state') }} ds on lower(ds.state_name) = lower(hu.GEOGRAPHICAREA)
 

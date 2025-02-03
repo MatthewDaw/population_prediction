@@ -1,13 +1,13 @@
 WITH inflow_migration AS (
 select start_year as year, ds.id as state_id, ds.state_name, number_of_individuals from pop_prediction.dev.src_migration_inflow mi
 JOIN
-pop_prediction.dev.dim_state ds on mi.state_name = ds.state_name
+{{ ref('dim_state') }} ds on mi.state_name = ds.state_name
 where ds.id is not null
 ),
 outflow_migration AS (
 select start_year as year, ds.id as state_id, ds.state_name, number_of_individuals from pop_prediction.dev.src_migration_outflow mo
 JOIN
-pop_prediction.dev.dim_state ds on mo.state_name = ds.state_name
+{{ ref('dim_state') }} ds on mo.state_name = ds.state_name
 where ds.id is not null
 )
 

@@ -3,7 +3,7 @@ WITH unpivoted_gdp AS (
         RANKING_2023_HIGH_TO_LOW AS location_name,
         CAST(SPLIT_PART(year_column, '_', 2) AS INT) AS year,
         CAST(gdp_value AS NUMERIC) AS gdp
-    FROM POP_PREDICTION.DEV.src_gdp_state
+    FROM {{ ref('src_gdp_state') }}
     UNPIVOT (
         gdp_value FOR year_column IN (
             YEAR_1997, YEAR_1998, YEAR_1999, YEAR_2000, YEAR_2001, YEAR_2002, YEAR_2003,
@@ -20,7 +20,7 @@ filtered_gdp AS (
         ug.year,
         ug.gdp
     FROM unpivoted_gdp ug
-    JOIN POP_PREDICTION.DEV.dim_state ds
+    JOIN {{ ref('dim_state') }} ds
         ON ug.location_name = ds.STATE_NAME
 )
 SELECT * FROM filtered_gdp

@@ -27,23 +27,23 @@ select
     pop_age_distribution.percentage_80_to_84_years,
     pop_age_distribution.percentage_85_years_and_over
 from
-pop_prediction.dev.fct_gdp as gdp
+{{ ref('fct_gdp') }} as gdp
 JOIN
-pop_prediction.dev.fct_births as births
+{{ ref('fct_births') }} as births
 ON
 gdp.state_id = births.state_id and gdp.year = births.year
 JOIN
-pop_prediction.dev.fct_house_unit_count house_unit_count
+{{ ref('fct_house_unit_count') }} house_unit_count
 ON house_unit_count.state_id = births.state_id and house_unit_count.year = births.year
 JOIN
-pop_prediction.dev.fct_housing_price_index as housing_price_index
+{{ ref('fct_housing_price_index') }} as housing_price_index
 ON housing_price_index.state_id = births.state_id and housing_price_index.year = births.year
 JOIN
-pop_prediction.dev.fct_migration as migration
+{{ ref('fct_migration') }} as migration
 on migration.year = births.year and migration.state_id = births.state_id
 JOIN
-pop_prediction.dev.fct_population as population
+{{ ref('fct_population') }} as population
 on population.state_id = births.state_id and population.year = births.year
 JOIN
-pop_prediction.dev.fct_pop_age_distribution as pop_age_distribution
+{{ ref('fct_pop_age_distribution') }} as pop_age_distribution
 on pop_age_distribution.state_id = births.state_id and pop_age_distribution.year = births.year
