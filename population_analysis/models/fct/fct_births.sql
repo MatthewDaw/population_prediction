@@ -1,0 +1,4 @@
+SELECT s.id as state_id, b.STATE, b.YEAR, b.BIRTHS
+FROM POP_PREDICTION.DEV.src_birthrate b
+JOIN POP_PREDICTION.DEV.dim_state s ON b.STATE = s.STATE_NAME
+WHERE s.ID IS NOT NULL

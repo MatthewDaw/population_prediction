@@ -1,0 +1,26 @@
+dbtlearn:
+  outputs:
+    dev:
+      account: rodquym-cnb81909
+      database: POP_PREDICTION
+      password: dbtPassword123
+      role: transform
+      schema: dev
+      threads: 1
+      type: snowflake
+      user: dbt
+      warehouse: COMPUTE_WH
+  target: dev
+population_analysis:
+  outputs:
+    dev:
+      account: rodquym-cnb81909
+      database: POP_PREDICTION
+      password: dbtPassword123
+      role: transform
+      schema: DEV
+      threads: 1
+      type: snowflake
+      user: dbt
+      warehouse: COMPUTE_WH
+  target: dev
