@@ -5,9 +5,8 @@ node_modules/
 !/.projen/deps.json
 !/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
-/.env
-!/requirements.txt
-!/requirements-dev.txt
+!/pyproject.toml
+/poetry.toml
 __pycache__/
 *.py[cod]
 *$py.class
@@ -66,7 +65,6 @@ __pypackages__/
 celerybeat-schedule
 celerybeat.pid
 *.sage.py
-.env
 .venv
 env/
 venv/
@@ -83,4 +81,6 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
+.env
+.env.secrets
 !/.projenrc.py
