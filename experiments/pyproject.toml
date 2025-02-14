@@ -8,11 +8,15 @@ authors = [ "Matthew Daw <mattdaw7@gmail.com>" ]
 readme = "README.md"
 
   [tool.poetry.dependencies]
+  cachetools = "*"
   matplotlib = "*"
+  mlflow = "*"
   pandas = "*"
   pydantic-settings = "^2.2.1"
   python-dotenv = "^0.21.0"
   python = "^3.12.0"
+  seaborn = "*"
+  snowflake-connector-python = "*"
   statsmodels = "*"
   structlog = "^24.2.0"
 

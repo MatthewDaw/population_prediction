@@ -14,7 +14,7 @@ readme = "README.md"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "*"
-projen = "0.91.8"
+projen = "0.91.9"
 
 [build-system]
 requires = [ "poetry-core" ]

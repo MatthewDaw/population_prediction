@@ -1,8 +1,9 @@
 """Model for making custom VAR model."""
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from scipy.linalg import lstsq
+
 
 class CustomVAR:
     """Model for making custom VAR model."""
@@ -15,7 +16,7 @@ class CustomVAR:
 
     def fit_for_specific_state(self, df: pd.DataFrame, p: int):
         """Fit the model for a specific state."""
-        T = df.shape[0] # Number of observations
+        T = df.shape[0]  # Number of observations
         n = df.shape[1]  # Number of time series
 
         Y = df.values[p:]  # shape = (T-p, n)
@@ -35,13 +36,8 @@ class CustomVAR:
         self.coefs_, residuals, rank, s = lstsq(X, Y)
         print("think more here")
 
-
     def fit(self, p: int):
         """Fit the model."""
         for state_name, columns_for_state in self.state_name_to_column_names.items():
             self.fit_for_specific_state(self.df[columns_for_state], p)
         print("think here")
-
-
-
-

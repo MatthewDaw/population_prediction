@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d4ca14ee-1969-476f-bf65-a6e81fca3ded" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.pre-commit-config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Justfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/.projen/deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/.projen/files.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/.projen/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/Justfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/poetry.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/experiment_suites/data_transformation_param_experiments_suites.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/experiment_suites/model_evaluation_experiments_suite.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/experiment_suites/models_experiments_suite.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/experiment_suites/raw_database_load_experiments_suites.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/generate_all_experiment_run_configs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformation_config_objects.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformations_modules/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformations_modules/data_normalization_logic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformations_sdk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/evaluation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/evaluation/evaluation_config_objects.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/evaluation/evaluation_sdk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/experiments_pipeline_sdk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/ml_models_config_objects.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/ml_models_modules/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/ml_models_modules/var.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/ml_models_modules/varmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/ml_models/ml_models_sdk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/raw_dataset_loader/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/raw_dataset_loader/raw_data_loader_config_objects.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/raw_dataset_loader/raw_data_loader_modules/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/raw_dataset_loader/raw_data_loader_modules/raw_data_loader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/raw_dataset_loader/raw_data_loader_sdk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/root_experiment_orchestrator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/sweep_generation_tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/sweep_generation_tools/config_list_generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/sweep_generation_tools/parameter_sweep_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/pyproject.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/population_data_analysis/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jupyter-settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/population_data_analysis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/population_prediction.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.projen/deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/.projen/deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.projenrc.py" beforeDir="false" afterPath="$PROJECT_DIR$/.projenrc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/.projen/deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/.projen/deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/analysis_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/analysis_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/custom_var_attempt.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/custom_var_attempt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/custom_var_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/custom_var_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/data_normalizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/data_normalizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/experiment_sdk.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/experiment_sdk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/visualizor.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/experiment_sdk/visualizor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/experiment_suites/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/experiment_coordinator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/experiment_sdk.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/ml_models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/ml_models/model_retriever.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/ml_models/parent_ml_model_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/ml_models/var.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/ml_models/varmax.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/data_loader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/data_normalizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/experiment_parameters.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/performance_measurer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/submodels/sweep_iterators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/experiment_sdk_v2/temp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/time_series_experiments.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/time_series_experiments.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/experiments/time_series_flow.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/experiments/time_series_flow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/tests/test_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/tests/test_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_analysis_dbt/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/population_analysis_dbt/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/2010-to2019housing-units.csv/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/2010-to2019housing-units.csv/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/seeds/age_by_state_by_year/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/seeds/age_by_state_by_year/temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/seeds/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/population_analysis_dbt/population_analysis_dbt/seeds/temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_analysis_dbt/tests/test_example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_data_analysis/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_data_analysis/__main__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/population_data_analysis/example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MattDawChiefAccount&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:MatthewDaw/population_prediction.git&quot;,
+    &quot;accountId&quot;: &quot;eefd5bf9-e269-480a-90e7-142842e0cbe9&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2szl4TLWtDEFHl2WD0ADyIhnnS0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.config_list_generation.executor": "Debug",
+    "Python.generate_all_experiment_run_configs.executor": "Debug",
+    "Python.get_all_possible_run_configs.executor": "Debug",
+    "Python.iterate_all_experiments.executor": "Debug",
+    "Python.root_experiment_orchestrator.executor": "Run",
+    "Python.run_experiment_run.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/matthewdaw/Documents/reference_repos/v2_pop_data_analysis/population_prediction",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/experiments/experiments" />
+      <recent name="$PROJECT_DIR$/population_data_analysis/ml_models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/population_data_analysis/population_data_analysis" />
+      <recent name="$PROJECT_DIR$/population_data_analysis/pipeline_operations/data_transformations" />
+      <recent name="$PROJECT_DIR$/population_data_analysis/pipeline_operations/transformations/data_transformations_modules" />
+      <recent name="$PROJECT_DIR$/population_data_analysis/pipeline_operations/ml_models/ml_models_modules" />
+      <recent name="$PROJECT_DIR$/population_data_analysis/pipeline_operations" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.root_experiment_orchestrator">
+    <configuration name="Run dbt build" type="DbtRunConfiguration" factoryName="DbtRunConfiguration">
+      <option name="dbtCommand" value="build" />
+      <module name="population_prediction" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run dbt debug" type="DbtRunConfiguration" factoryName="DbtRunConfiguration">
+      <option name="dbtCommand" value="debug" />
+      <module name="population_prediction" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run dbt list" type="DbtRunConfiguration" factoryName="DbtRunConfiguration">
+      <option name="dbtCommand" value="list" />
+      <module name="population_prediction" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run dbt run" type="DbtRunConfiguration" factoryName="DbtRunConfiguration">
+      <option name="dbtCommand" value="run" />
+      <module name="population_prediction" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run dbt test" type="DbtRunConfiguration" factoryName="DbtRunConfiguration">
+      <option name="dbtCommand" value="test" />
+      <module name="population_prediction" />
+      <method v="2" />
+    </configuration>
+    <configuration name="config_list_generation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="population_prediction" />
+      <option name="ENV_FILES" value="$PROJECT_DIR$/.env.secrets" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/population_data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.PythonAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/population_data_analysis/sweep_generation_tools/config_list_generation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="generate_all_experiment_run_configs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="population_prediction" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/population_data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/population_data_analysis/population_data_analysis/generate_all_experiment_run_configs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="root_experiment_orchestrator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="population_prediction" />
+      <option name="ENV_FILES" value="$PROJECT_DIR$/.env.secrets" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/population_data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.PythonAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/population_data_analysis/population_data_analysis/root_experiment_orchestrator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="dbt.Run dbt build" />
+      <item itemvalue="dbt.Run dbt debug" />
+      <item itemvalue="dbt.Run dbt list" />
+      <item itemvalue="dbt.Run dbt run" />
+      <item itemvalue="dbt.Run dbt test" />
+      <item itemvalue="Python.root_experiment_orchestrator" />
+      <item itemvalue="Python.generate_all_experiment_run_configs" />
+      <item itemvalue="Python.config_list_generation" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.root_experiment_orchestrator" />
+        <item itemvalue="Python.generate_all_experiment_run_configs" />
+        <item itemvalue="Python.config_list_generation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.24807.21" />
+        <option value="bundled-python-sdk-00717045f1d3-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.24807.21" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d4ca14ee-1969-476f-bf65-a6e81fca3ded" name="Changes" comment="" />
+      <created>1739466093111</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739466093111</updated>
+      <workItem from="1739466094799" duration="15659000" />
+      <workItem from="1739498115891" duration="28454000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformations_sdk.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/population_data_analysis/population_data_analysis/pipeline_operations/data_transformations/data_transformations_modules/data_normalization_logic.py</url>
+          <line>130</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/population_prediction$iterate_all_experiments.coverage" NAME="generate_all_experiment_run_configs Coverage Results" MODIFIED="1739514622986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/population_data_analysis" />
+    <SUITE FILE_PATH="coverage/population_prediction$run_experiment_run.coverage" NAME="root_experiment_orchestrator Coverage Results" MODIFIED="1739531297291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/population_data_analysis" />
+    <SUITE FILE_PATH="coverage/population_prediction$get_all_possible_run_configs.coverage" NAME="config_list_generation Coverage Results" MODIFIED="1739473413772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/population_data_analysis" />
+  </component>
+</project>

@@ -12,16 +12,16 @@ Usage:
     Run this script directly. It will simulate the data, run the analysis, and produce visualizations.
 """
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import networkx as nx
 import warnings
 
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from scipy.stats import t as t_dist
 from statsmodels.tsa.api import VAR
 from statsmodels.tsa.stattools import adfuller
-from scipy.stats import t as t_dist
 
 warnings.filterwarnings("ignore")
 
@@ -39,7 +39,9 @@ class VARModelAnalyzer:
         """
         self.significance = significance
         self.maxlags = maxlags
-        self.states = states if states is not None else [f"State_{i}" for i in range(1, 51)]
+        self.states = (
+            states if states is not None else [f"State_{i}" for i in range(1, 51)]
+        )
         self.state_data = state_data if state_data is not None else self.simulate_data()
         self.state_var_results = {}
         self.global_var_result = None
@@ -59,7 +61,7 @@ class VARModelAnalyzer:
             data = np.random.randn(12, 22)
             df = pd.DataFrame(data, columns=[f"Var_{j}" for j in range(1, 23)])
             # Create a time index (monthly observations)
-            df.index = pd.date_range(start='2024-01-01', periods=12, freq='M')
+            df.index = pd.date_range(start="2024-01-01", periods=12, freq="M")
             simulated_data[state] = df
         return simulated_data
 
@@ -147,8 +149,10 @@ class VARModelAnalyzer:
 
             allowed_maxlags = self.compute_allowed_maxlags(n_obs, n_vars)
             if allowed_maxlags < 1:
-                print(f"  [Warning] Not enough observations to estimate a VAR model for {state} "
-                      f"(n_obs={n_obs}, n_vars={n_vars}, allowed_maxlags={allowed_maxlags}). Skipping.\n")
+                print(
+                    f"  [Warning] Not enough observations to estimate a VAR model for {state} "
+                    f"(n_obs={n_obs}, n_vars={n_vars}, allowed_maxlags={allowed_maxlags}). Skipping.\n"
+                )
                 continue
 
             # Use the smaller of the desired maxlags and the allowed maximum.
@@ -160,14 +164,14 @@ class VARModelAnalyzer:
                 if selected_lag == 0:
                     selected_lag = 1  # Force at least one lag.
                 var_result = model.fit(selected_lag)
-            except Exception as e:
+            except Exception as e: # pylint: disable=broad-exception-caught
                 print(f"  [Error] VAR estimation failed for {state}: {e}\n")
                 continue
 
             self.state_var_results[state] = {
                 "lag_order": selected_lag,
                 "model_summary": var_result.summary(),
-                "model_params": var_result.params
+                "model_params": var_result.params,
             }
 
             print(var_result.summary())
@@ -203,9 +207,11 @@ class VARModelAnalyzer:
         n_vars = combined_df.shape[1]
         allowed_maxlags = self.compute_allowed_maxlags(n_obs, n_vars)
         if allowed_maxlags < 1:
-            print(f"  [Warning] Not enough observations to estimate a global VAR model "
-                  f"(n_obs={n_obs}, n_vars={n_vars}, allowed_maxlags={allowed_maxlags}). "
-                  f"Proceeding with lag order set to 1 (estimation may fail).")
+            print(
+                f"  [Warning] Not enough observations to estimate a global VAR model "
+                f"(n_obs={n_obs}, n_vars={n_vars}, allowed_maxlags={allowed_maxlags}). "
+                f"Proceeding with lag order set to 1 (estimation may fail)."
+            )
             local_maxlags = 1
         else:
             local_maxlags = min(self.maxlags, allowed_maxlags)
@@ -220,7 +226,7 @@ class VARModelAnalyzer:
             print("Global VAR Model Summary:")
             print(self.global_var_result.summary())
             print("\n" + "=" * 80 + "\n")
-        except Exception as e:
+        except Exception as e: # pylint: disable=broad-exception-caught
             print(f"Error fitting global VAR model: {e}")
             self.global_var_result = None
 
@@ -249,7 +255,7 @@ class VARModelAnalyzer:
         # The dependent variables in the global model are named like "State_X_Var_Y".
         # Coefficient names (except the intercept) are like "L1.State_X_Var_Y".
         for dep_var in params.index:
-            tokens = dep_var.split('_')
+            tokens = dep_var.split("_")
             if len(tokens) < 2:
                 continue  # Skip unexpected format
             dep_state = "_".join(tokens[:2])
@@ -259,11 +265,11 @@ class VARModelAnalyzer:
                     continue  # Skip intercept
 
                 try:
-                    lag_info, var_name = coef.split('.', 1)
+                    lag_info, var_name = coef.split(".", 1)
                 except ValueError:
                     continue  # Skip coefficients not following the expected pattern
 
-                tokens_coef = var_name.split('_')
+                tokens_coef = var_name.split("_")
                 if len(tokens_coef) < 2:
                     continue
                 lagged_state = "_".join(tokens_coef[:2])
@@ -271,7 +277,10 @@ class VARModelAnalyzer:
                 # Check significance using the p-value threshold.
                 p_val = p_values.loc[dep_var, coef]
                 if p_val < self.significance:
-                    if lagged_state in rel_matrix.columns and dep_state in rel_matrix.index:
+                    if (
+                        lagged_state in rel_matrix.columns
+                        and dep_state in rel_matrix.index
+                    ):
                         rel_matrix.loc[dep_state, lagged_state] += 1
 
         self.relationship_matrix = rel_matrix
@@ -289,7 +298,9 @@ class VARModelAnalyzer:
         # Heatmap visualization.
         plt.figure(figsize=(12, 10))
         sns.heatmap(self.relationship_matrix, annot=True, fmt="d", cmap="YlGnBu")
-        plt.title("Significant Inter-State Relationships\n(Count of Significant Lagged Coefficients)")
+        plt.title(
+            "Significant Inter-State Relationships\n(Count of Significant Lagged Coefficients)"
+        )
         plt.xlabel("Lagged (Predictor) State")
         plt.ylabel("Dependent (Target) State")
         plt.tight_layout()
@@ -310,10 +321,12 @@ class VARModelAnalyzer:
         plt.figure(figsize=(12, 12))
         pos = nx.spring_layout(G, seed=42)
         edges = G.edges(data=True)
-        edge_weights = [d['weight'] for (_, _, d) in edges]
+        edge_weights = [d["weight"] for (_, _, d) in edges]
 
         nx.draw_networkx_nodes(G, pos, node_size=700, node_color="lightblue")
-        nx.draw_networkx_edges(G, pos, width=edge_weights, arrowstyle='->', arrowsize=20)
+        nx.draw_networkx_edges(
+            G, pos, width=edge_weights, arrowstyle="->", arrowsize=20
+        )
         nx.draw_networkx_labels(G, pos, font_size=10)
         plt.title("Network Graph of Significant Inter-State Relationships")
         plt.axis("off")
@@ -329,12 +342,14 @@ class VARModelAnalyzer:
         """
         print("\nExample Interpretation:")
         print("-" * 50)
-        print("The relationship matrix displays counts of statistically significant lagged coefficients\n"
-              "between states. For example, if the cell at row 'State_10' and column 'State_5' has a value of 3,\n"
-              "this indicates that three lagged variables from State_5 are significant predictors of variables\n"
-              "in State_10. Such relationships can help identify which states' time series influence others,\n"
-              "potentially signaling spillover effects or shared dynamics. Further investigation of these pairs\n"
-              "may reveal underlying economic, social, or other factors driving these interactions.")
+        print(
+            "The relationship matrix displays counts of statistically significant lagged coefficients\n"
+            "between states. For example, if the cell at row 'State_10' and column 'State_5' has a value of 3,\n"
+            "this indicates that three lagged variables from State_5 are significant predictors of variables\n"
+            "in State_10. Such relationships can help identify which states' time series influence others,\n"
+            "potentially signaling spillover effects or shared dynamics. Further investigation of these pairs\n"
+            "may reveal underlying economic, social, or other factors driving these interactions."
+        )
         print("-" * 50 + "\n")
 
     def run_analysis(self):

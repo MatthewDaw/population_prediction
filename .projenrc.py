@@ -1,6 +1,5 @@
 from projen.python import PythonProject
 
-
 AUTHORS = ["Matthew Daw"]
 AUTHOR_EMAIL = "mattdaw7@gmail.com"
 AWS_PROFILE_NAME = "sandbox"
@@ -38,7 +37,7 @@ DBT_PROJECT = PythonProject(
         "structlog@^24.2.0",
         "pydantic-settings@^2.2.1",
         "python-dotenv@^0.21.0",
-        "pandas"
+        "pandas",
     ],
 )
 
@@ -63,9 +62,38 @@ EXPERIMENTS_PROJECT = PythonProject(
         "statsmodels",
         "mlflow",
         "seaborn",
+        "snowflake-connector-python",
+        "cachetools",
+    ],
+)
+
+POPULATION_DATA_ANALYSIS_NAME = "population_data_analysis"
+POPULATION_DATA_ANALYSIS_PROJECT = PythonProject(
+    parent=ROOT_PROJECT,
+    author_email=AUTHOR_EMAIL,
+    author_name=AUTHORS[0],
+    module_name=POPULATION_DATA_ANALYSIS_NAME.replace("-", "_"),
+    name=POPULATION_DATA_ANALYSIS_NAME,
+    outdir=POPULATION_DATA_ANALYSIS_NAME,
+    version="0.0.0",
+    description="Module only for API contracts between services.",
+    poetry=True,
+    deps=[
+        "python@^3.12.0",
+        "structlog@^24.2.0",
+        "pydantic-settings@^2.2.1",
+        "python-dotenv@^0.21.0",
+        "pandas",
+        "matplotlib",
+        "statsmodels",
+        "mlflow",
+        "seaborn",
+        "snowflake-connector-python",
+        "cachetools",
     ],
 )
 
 ROOT_PROJECT.synth()
 DBT_PROJECT.synth()
 EXPERIMENTS_PROJECT.synth()
+POPULATION_DATA_ANALYSIS_PROJECT.synth()

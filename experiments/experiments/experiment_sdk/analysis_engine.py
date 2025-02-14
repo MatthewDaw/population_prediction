@@ -1,9 +1,9 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from statsmodels.tsa.api import VAR
-from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.feature_selection import mutual_info_regression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+from statsmodels.tsa.api import VAR
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 
@@ -43,7 +43,7 @@ class VARModelOptimizer:
         print("Model Performance:", performance)
     """
 
-    def __init__(self, data: pd.DataFrame, model_type: str = 'VAR'):
+    def __init__(self, data: pd.DataFrame, model_type: str = "VAR"):
         """
         Initialize the optimizer with a DataFrame and a model type.
 
@@ -66,7 +66,9 @@ class VARModelOptimizer:
         """
         return self.data.copy()
 
-    def select_columns(self, n_columns: int = None, method: str = 'correlation') -> list:
+    def select_columns(
+        self, n_columns: int = None, method: str = "correlation"
+    ) -> list:
         """
         Select the top n columns based on importance scores.
 
@@ -87,11 +89,11 @@ class VARModelOptimizer:
             n_columns = total_cols
 
         scores = {}
-        if method == 'correlation':
+        if method == "correlation":
             corr_matrix = df.corr().abs()
             for col in df.columns:
                 scores[col] = corr_matrix.loc[col].drop(col).mean()
-        elif method == 'mutual_info':
+        elif method == "mutual_info":
             for col in df.columns:
                 series = df[col].dropna()
                 if len(series) < 2:
@@ -107,7 +109,9 @@ class VARModelOptimizer:
         selected_columns = [col for col, score in sorted_cols[:n_columns]]
         return selected_columns
 
-    def optimize_hyperparameters(self, selected_columns: list, p_range=range(1, 11), metric: str = 'mse') -> dict:
+    def optimize_hyperparameters(
+        self, selected_columns: list, p_range=range(1, 11), metric: str = "mse"
+    ) -> dict:
         """
         Optimize the model's order (p) using a grid search over the candidate range.
 
@@ -131,17 +135,18 @@ class VARModelOptimizer:
 
         for p in p_range:
             try:
-                if self.model_type == 'VAR':
+                if self.model_type == "VAR":
                     model = VAR(train_data)
                     model_fit = model.fit(p)
                     lag_obs = train_data.values[-p:]
                     forecast = model_fit.forecast(lag_obs, steps=len(val_data))
-                elif self.model_type == 'VARMAX':
+                elif self.model_type == "VARMAX":
                     from statsmodels.tsa.statespace.varmax import VARMAX
+
                     model = VARMAX(train_data, order=(p, 0))
                     model_fit = model.fit(disp=False)
                     forecast = model_fit.forecast(steps=len(val_data))
-                elif self.model_type == 'SARIMAX':
+                elif self.model_type == "SARIMAX":
                     # Fit univariate SARIMAX models for each column and average the error.
                     errors = []
                     for col in selected_columns:
@@ -150,9 +155,9 @@ class VARModelOptimizer:
                         model = SARIMAX(series_train, order=(p, 0, 0))
                         model_fit = model.fit(disp=False)
                         fc = model_fit.forecast(steps=len(series_val))
-                        if metric == 'mse':
+                        if metric == "mse":
                             err = mean_squared_error(series_val, fc)
-                        elif metric == 'mae':
+                        elif metric == "mae":
                             err = mean_absolute_error(series_val, fc)
                         else:
                             raise ValueError("Unsupported metric. Use 'mse' or 'mae'.")
@@ -162,19 +167,24 @@ class VARModelOptimizer:
                         best_score = error
                         best_p = p
                     continue  # Move to the next candidate p.
-                elif self.model_type == 'MARKOV':
+                elif self.model_type == "MARKOV":
                     # For Markov Autoregression, fit each column individually.
-                    from statsmodels.tsa.regime_switching.markov_autoregression import MarkovAutoregression
+                    from statsmodels.tsa.regime_switching.markov_autoregression import (
+                        MarkovAutoregression,
+                    )
+
                     errors = []
                     for col in selected_columns:
                         series_train = train_data[col]
                         series_val = val_data[col]
-                        model = MarkovAutoregression(series_train, k_regimes=2, order=p, switching_ar=True)
+                        model = MarkovAutoregression(
+                            series_train, k_regimes=2, order=p, switching_ar=True
+                        )
                         model_fit = model.fit(disp=False)
                         fc = model_fit.forecast(steps=len(series_val))
-                        if metric == 'mse':
+                        if metric == "mse":
                             err = mean_squared_error(series_val, fc)
-                        elif metric == 'mae':
+                        elif metric == "mae":
                             err = mean_absolute_error(series_val, fc)
                         else:
                             raise ValueError("Unsupported metric. Use 'mse' or 'mae'.")
@@ -185,16 +195,18 @@ class VARModelOptimizer:
                         best_p = p
                     continue
                 else:
-                    raise ValueError("Unsupported model type. Use 'VAR', 'VARMAX', 'SARIMAX', or 'MARKOV'.")
-            except Exception as e:
+                    raise ValueError(
+                        "Unsupported model type. Use 'VAR', 'VARMAX', 'SARIMAX', or 'MARKOV'."
+                    )
+            except Exception: # pylint: disable=broad-exception-caught
                 # Skip candidate orders that cause errors.
                 continue
 
             # For VAR and VARMAX, compute the error on the validation set.
-            if self.model_type in ['VAR', 'VARMAX']:
-                if metric == 'mse':
+            if self.model_type in ["VAR", "VARMAX"]:
+                if metric == "mse":
                     error = mean_squared_error(val_data.values, forecast)
-                elif metric == 'mae':
+                elif metric == "mae":
                     error = mean_absolute_error(val_data.values, forecast)
                 else:
                     raise ValueError("Unsupported metric. Use 'mse' or 'mae'.")
@@ -203,10 +215,14 @@ class VARModelOptimizer:
                     best_p = p
 
         if best_p is None:
-            raise ValueError("Failed to determine an optimal order p. Check your data and p_range.")
-        return {'p': best_p}
+            raise ValueError(
+                "Failed to determine an optimal order p. Check your data and p_range."
+            )
+        return {"p": best_p}
 
-    def evaluate_model(self, selected_columns: list, hyperparams: dict, metric: str = 'mse') -> dict:
+    def evaluate_model(
+        self, selected_columns: list, hyperparams: dict, metric: str = "mse"
+    ) -> dict:
         """
         Fit the model with the selected columns and hyperparameters on training+validation data,
         then evaluate its forecasting performance on the test set.
@@ -225,19 +241,20 @@ class VARModelOptimizer:
         train_val_end = int(n_obs * 0.85)
         train_val_data = data.iloc[:train_val_end]
         test_data = data.iloc[train_val_end:]
-        p = hyperparams.get('p', 1)
+        p = hyperparams.get("p", 1)
 
-        if self.model_type == 'VAR':
+        if self.model_type == "VAR":
             model = VAR(train_val_data)
             model_fit = model.fit(p)
             lag_obs = train_val_data.values[-p:]
             forecast = model_fit.forecast(lag_obs, steps=len(test_data))
-        elif self.model_type == 'VARMAX':
+        elif self.model_type == "VARMAX":
             from statsmodels.tsa.statespace.varmax import VARMAX
+
             model = VARMAX(train_val_data, order=(p, 0))
             model_fit = model.fit(disp=False)
             forecast = model_fit.forecast(steps=len(test_data))
-        elif self.model_type == 'SARIMAX':
+        elif self.model_type == "SARIMAX":
             forecasts = []
             for col in selected_columns:
                 series_train_val = train_val_data[col]
@@ -247,37 +264,49 @@ class VARModelOptimizer:
                 fc = model_fit.forecast(steps=len(series_test))
                 forecasts.append(fc.values)
             forecast = np.column_stack(forecasts)
-        elif self.model_type == 'MARKOV':
-            from statsmodels.tsa.regime_switching.markov_autoregression import MarkovAutoregression
+        elif self.model_type == "MARKOV":
+            from statsmodels.tsa.regime_switching.markov_autoregression import (
+                MarkovAutoregression,
+            )
+
             forecasts = []
             for col in selected_columns:
                 series_train_val = train_val_data[col]
                 series_test = test_data[col]
-                model = MarkovAutoregression(series_train_val, k_regimes=2, order=p, switching_ar=True)
+                model = MarkovAutoregression(
+                    series_train_val, k_regimes=2, order=p, switching_ar=True
+                )
                 model_fit = model.fit(disp=False)
                 fc = model_fit.forecast(steps=len(series_test))
                 forecasts.append(fc)
             forecast = np.column_stack(forecasts)
         else:
-            raise ValueError("Unsupported model type. Use 'VAR', 'VARMAX', 'SARIMAX', or 'MARKOV'.")
+            raise ValueError(
+                "Unsupported model type. Use 'VAR', 'VARMAX', 'SARIMAX', or 'MARKOV'."
+            )
 
-        if metric == 'mse':
+        if metric == "mse":
             error = mean_squared_error(test_data.values, forecast)
-        elif metric == 'mae':
+        elif metric == "mae":
             error = mean_absolute_error(test_data.values, forecast)
         else:
             raise ValueError("Unsupported metric. Use 'mse' or 'mae'.")
 
         performance = {
-            'metric': metric,
-            'error': error,
-            'forecast': forecast,
-            'test_actual': test_data.values
+            "metric": metric,
+            "error": error,
+            "forecast": forecast,
+            "test_actual": test_data.values,
         }
         return performance
 
-    def optimize_columns_and_hyperparams(self, n_columns: int = None, selection_method: str = 'correlation',
-                                         p_range=range(1, 11), metric: str = 'mse') -> tuple:
+    def optimize_columns_and_hyperparams(
+        self,
+        n_columns: int = None,
+        selection_method: str = "correlation",
+        p_range=range(1, 11),
+        metric: str = "mse",
+    ) -> tuple:
         """
         Optimize both the column selection and the model hyperparameters.
 
@@ -290,12 +319,21 @@ class VARModelOptimizer:
         Returns:
             tuple: (selected_columns, best_hyperparameters)
         """
-        selected_columns = self.select_columns(n_columns=n_columns, method=selection_method)
-        best_hyperparams = self.optimize_hyperparameters(selected_columns, p_range=p_range, metric=metric)
+        selected_columns = self.select_columns(
+            n_columns=n_columns, method=selection_method
+        )
+        best_hyperparams = self.optimize_hyperparameters(
+            selected_columns, p_range=p_range, metric=metric
+        )
         return selected_columns, best_hyperparams
 
-    def run(self, n_columns: int = None, selection_method: str = 'correlation',
-            p_range=range(1, 11), metric: str = 'mse') -> tuple:
+    def run(
+        self,
+        n_columns: int = None,
+        selection_method: str = "correlation",
+        p_range=range(1, 11),
+        metric: str = "mse",
+    ) -> tuple:
         """
         Run the full optimization pipeline:
           1. Optimize column selection.
@@ -315,9 +353,9 @@ class VARModelOptimizer:
             n_columns=n_columns,
             selection_method=selection_method,
             p_range=p_range,
-            metric=metric
+            metric=metric,
         )
-        performance = self.evaluate_model(selected_columns, best_hyperparams, metric=metric)
+        performance = self.evaluate_model(
+            selected_columns, best_hyperparams, metric=metric
+        )
         return selected_columns, best_hyperparams, performance
-
-

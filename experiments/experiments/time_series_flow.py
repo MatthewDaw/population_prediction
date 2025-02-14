@@ -1,11 +1,12 @@
 from metaflow import FlowSpec, step
 from sklearn.datasets import load_wine
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+
 
 class WineAblationFlow(FlowSpec):
 
@@ -24,16 +25,20 @@ class WineAblationFlow(FlowSpec):
         """
         print("Loading wine dataset...")
         data = load_wine()
-        X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
-        
+        X_train, X_test, y_train, y_test = train_test_split(
+            data.data, data.target, test_size=0.2, random_state=42
+        )
+
         # Standardize the data
         scaler = StandardScaler()
         self.X_train = scaler.fit_transform(X_train)
         self.X_test = scaler.transform(X_test)
         self.y_train = y_train
         self.y_test = y_test
-        
-        self.next(self.train_logistic_regression, self.train_random_forest, self.train_svc)
+
+        self.next(
+            self.train_logistic_regression, self.train_random_forest, self.train_svc
+        )
 
     @step
     def train_logistic_regression(self):
@@ -43,7 +48,9 @@ class WineAblationFlow(FlowSpec):
         print("Training Logistic Regression model...")
         model = LogisticRegression(max_iter=1000)
         model.fit(self.X_train, self.y_train)
-        self.logistic_regression_accuracy = accuracy_score(self.y_test, model.predict(self.X_test))
+        self.logistic_regression_accuracy = accuracy_score(
+            self.y_test, model.predict(self.X_test)
+        )
         self.next(self.join)
 
     @step
@@ -54,7 +61,9 @@ class WineAblationFlow(FlowSpec):
         print("Training Random Forest model...")
         model = RandomForestClassifier()
         model.fit(self.X_train, self.y_train)
-        self.random_forest_accuracy = accuracy_score(self.y_test, model.predict(self.X_test))
+        self.random_forest_accuracy = accuracy_score(
+            self.y_test, model.predict(self.X_test)
+        )
         self.next(self.join)
 
     @step
@@ -73,7 +82,9 @@ class WineAblationFlow(FlowSpec):
         """
         Join the results from different models.
         """
-        self.logistic_regression_accuracy = inputs.train_logistic_regression.logistic_regression_accuracy
+        self.logistic_regression_accuracy = (
+            inputs.train_logistic_regression.logistic_regression_accuracy
+        )
         self.random_forest_accuracy = inputs.train_random_forest.random_forest_accuracy
         self.svc_accuracy = inputs.train_svc.svc_accuracy
         self.next(self.end)
@@ -88,7 +99,6 @@ class WineAblationFlow(FlowSpec):
         print(f"Random Forest Accuracy: {self.random_forest_accuracy}")
         print(f"SVC Accuracy: {self.svc_accuracy}")
 
-if __name__ == '__main__':
-    WineAblationFlow()
 
-    
+if __name__ == "__main__":
+    WineAblationFlow()

@@ -1,5 +1,6 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+
 
 class Visualizer:
 
@@ -29,12 +30,18 @@ class Visualizer:
 
         # Plot the full true series for each column.
         for col in true_df.columns:
-            plt.plot(true_df.index, true_df[col], label=f"{col} True", marker='o')
+            plt.plot(true_df.index, true_df[col], label=f"{col} True", marker="o")
 
         # Overlay the predictions with a different style.
         for col in pred_df.columns:
-            plt.plot(true_df.index[-1*len(pred_df):], pred_df[col], label=f"{col} Predicted",
-                     linestyle='--', marker='x', markersize=10)
+            plt.plot(
+                true_df.index[-1 * len(pred_df) :],
+                pred_df[col],
+                label=f"{col} Predicted",
+                linestyle="--",
+                marker="x",
+                markersize=10,
+            )
 
         plt.xlabel("Time")
         plt.ylabel("Value")

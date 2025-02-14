@@ -2,6 +2,7 @@ import pytest
 
 from experiments.example import hello
 
+
 @pytest.mark.parametrize(
     ("name", "expected"),
     [

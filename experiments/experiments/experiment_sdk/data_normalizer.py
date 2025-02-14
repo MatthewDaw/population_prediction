@@ -1,15 +1,13 @@
 """Main file for working with experiments."""
 
 import os
-from typing import Optional, List
+from typing import List, Optional
 
-import snowflake.connector
-import pandas as pd
-from statsmodels.tsa.stattools import adfuller
 import numpy as np
-
+import pandas as pd
+import snowflake.connector
 from pydantic import BaseModel, ConfigDict
-
+from statsmodels.tsa.stattools import adfuller
 
 
 class RestorativeValues(BaseModel):
@@ -21,6 +19,7 @@ class RestorativeValues(BaseModel):
     state_column: Optional[pd.Series] = None
     column_order: List[str]
     dropped_columns: pd.DataFrame
+
 
 class DataTransformer:
     """Main class for working with experiments."""
@@ -51,8 +50,7 @@ class DataTransformer:
         restored_df = pd.DataFrame(restored_df)
         return restored_df
 
-
-    def undo_transformations(self,  transformed_df, add_first_row=True):
+    def undo_transformations(self, transformed_df, add_first_row=True):
         """
         Revert the transformations (un-standardize, un-diff, un-log).
 
@@ -84,7 +82,9 @@ class DataTransformer:
         restored_df["YEAR"] = self.restorative_values.years_column
         if self.restorative_values.state_column:
             restored_df["STATE_NAME"] = self.restorative_values.state_column
-        restored_df = pd.concat([restored_df, self.restorative_values.dropped_columns], axis=1)
+        restored_df = pd.concat(
+            [restored_df, self.restorative_values.dropped_columns], axis=1
+        )
         return restored_df[self.restorative_values.column_order]
 
     def normalize_data(self, df, always_diff=False):
@@ -103,8 +103,8 @@ class DataTransformer:
         original_length = len(df)
         original_column_names = list(df.columns)
         numique = df.nunique()
-        dropped_columns = df.loc[:, numique <= original_length//2]
-        df = df.loc[:, numique > original_length//2]
+        dropped_columns = df.loc[:, numique <= original_length // 2]
+        df = df.loc[:, numique > original_length // 2]
 
         transformed_columns = []
         operation_rules_list = []
@@ -112,7 +112,9 @@ class DataTransformer:
 
         # Decide which columns to transform (e.g., skip year/state name, etc.)
         # We'll skip any non-numeric columns for clarity.
-        columns_to_include = [col for col in df.columns if col not in ["YEAR", "STATE_NAME"]]
+        columns_to_include = [
+            col for col in df.columns if col not in ["YEAR", "STATE_NAME"]
+        ]
         for col in columns_to_include:
 
             # df[col] = df[col].astype(float)
@@ -126,7 +128,7 @@ class DataTransformer:
                 "needs_diff": False,
                 "first_value_diff": None,  # We'll store the first data point after log if we do differencing
                 "mean": 0.0,
-                "std": 1.0
+                "std": 1.0,
             }
 
             # 1) Decide on log transform based on skew
@@ -136,13 +138,12 @@ class DataTransformer:
                 rules["log"] = True
                 # You must ensure all values are > 0 for log. If your data can be zero or negative,
                 # you'll need a shift, e.g.: series = np.log(series - series.min() + 1)
-                try:
-                    series = np.log(series)
-                except Exception as err:
-                    print("think")
+                series = np.log(series)
 
             # 2) Check stationarity and possibly difference
-            result = adfuller(series.dropna())  # dropna to avoid issues if log created NaNs
+            result = adfuller(
+                series.dropna()
+            )  # dropna to avoid issues if log created NaNs
             p_value = result[1]
             if p_value > 0.05 or always_diff:
                 rules["needs_diff"] = True
@@ -153,7 +154,9 @@ class DataTransformer:
 
             # 3) Standardize: subtract mean, divide by std
             mean_val = series.mean()
-            std_val = series.std() if series.std() != 0 else 1.0  # avoid division by zero
+            std_val = (
+                series.std() if series.std() != 0 else 1.0
+            )  # avoid division by zero
             rules["mean"] = mean_val
             rules["std"] = std_val
             series = (series - mean_val) / std_val
@@ -176,13 +179,17 @@ class DataTransformer:
             operation_rules_list=operation_rules_list,
             years_column=df["YEAR"],
             column_order=original_column_names,
-            dropped_columns=dropped_columns
+            dropped_columns=dropped_columns,
         )
         return transformed_df
 
-    def undo_transformation_for_forcast(self, forecast, selected_columns, correct_col_order):
+    def undo_transformation_for_forcast(
+        self, forecast, selected_columns, correct_col_order
+    ):
         forcasted_values = pd.DataFrame(forecast, columns=selected_columns)
         forcasted_values = forcasted_values[correct_col_order]
         forcasted_values.reset_index(drop=True, inplace=True)
-        corrected_forcasted_values = self.undo_transformations(forcasted_values, add_first_row=False)
+        corrected_forcasted_values = self.undo_transformations(
+            forcasted_values, add_first_row=False
+        )
         return corrected_forcasted_values
